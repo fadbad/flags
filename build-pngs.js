@@ -12,7 +12,7 @@ function get_output_directory() {
     // var dir = 'png' + (dim.length > 1 ? dim.join('x') : dim) + 'px'
     var dir = (dim.length > 1 ? dim.join('x') : dim)
 
-    return dir
+    return './'+dir
 }
 
 function get_output_dimensions() {
@@ -30,8 +30,8 @@ function check_arguments(callback) {
         var output_folder = get_output_directory()
         console.log("Output folder: " + output_folder)
         
-        if (!fs.existsSync(output_folder)){
-            fs.mkdirSync(output_folder)
+        if (!fs.existsSync('./'+output_folder)){
+            fs.mkdirSync('./'+output_folder)
         }
 
         callback()
@@ -88,7 +88,7 @@ function get_all_svgs(callback) {
 function convert_and_compress_svg(path_to_svg, callback) {
     var path_to_tmp_png = path_to_svg.substring(0, path_to_svg.length - 4) + '.png'
     var svgexport_command = "svgexport " + path_to_svg + " " + path_to_tmp_png + " pad " + get_output_dimensions()
-    console.log(svgexport_command)
+    // console.log(svgexport_command)
     exec(svgexport_command, (error, stdout, stderr) => {
         if (error) {
             console.log("Failed to convert SVG: " + path_to_svg)
@@ -96,7 +96,7 @@ function convert_and_compress_svg(path_to_svg, callback) {
         }
 
         var image_min_command = "imagemin " + path_to_tmp_png + " --out-dir=" + get_output_directory()
-        console.log(image_min_command)
+        // console.log(image_min_command)
         exec(image_min_command, (error, stdout, stderr) => {
             // Always remove temp file
             fs.unlink(path_to_tmp_png, (error) => {})

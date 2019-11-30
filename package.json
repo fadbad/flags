@@ -3,8 +3,10 @@
   "version": "1.2.6",
   "description": "SVG and PNG renders of all countries' flags.",
   "scripts": {
-    "build-pngs": "node scripts/build-pngs.js",
-    "build-100-250-1000-pngs": "node build-pngs.js 100: && node build-pngs.js 250: && node build-pngs.js 1000:"
+    "build-pngs": "node build-pngs.js",
+    "build-100-250-1000-pngs": "node build-pngs.js 100: && node build-pngs.js 250: && node build-pngs.js 1000:",
+    "build": "node build-pngs.js 64: && node build-pngs.js 128: && node build-pngs.js 256: && node build-pngs.js 512:",
+    "build-tmp": "node build-pngs.js 128: && node build-pngs.js 256: && node build-pngs.js 512:"
   },
   "repository": {
     "type": "git",
